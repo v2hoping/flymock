@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hoping.owl</groupId>
+    <artifactId>flymock-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1.0-SNAPSHOT</version>
+    <modules>
+        <module>flymock</module>
+        <module>spring-boot-starter-flymock</module>
+    </modules>
+
+    <name>flymock-parent</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-boot.version>2.0.4.RELEASE</spring-boot.version>
+        <version.compiler-plugin>3.5.1</version.compiler-plugin>
+        <version.source-plugin>2.4</version.source-plugin>
+        <version.javadoc-plugin>2.9.1</version.javadoc-plugin>
+        <version.maven-gpg-plugin>1.5</version.maven-gpg-plugin>
+        <fastjson.version>1.2.54</fastjson.version>
+        <junit.version>4.12</junit.version>
+        <logback.version>1.2.3</logback.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--json序列化-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!--junit-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--日志-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <!-- Import dependency management from Spring Boot,not include plugin
+                    management as the parent import style -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.0</version>
+                <!-- 绑定source插件到Maven的生命周期,并在生命周期后执行绑定的source的goal -->
+                <executions>
+                    <execution>
+                        <!-- 绑定source插件到Maven的生命周期 -->
+                        <phase>compile</phase>
+                        <!--在生命周期后执行绑定的source插件的goals -->
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.compiler-plugin}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <compilerVersion>${java.version}</compilerVersion>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${version.source-plugin}</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

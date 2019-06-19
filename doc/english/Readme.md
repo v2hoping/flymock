@@ -2,23 +2,23 @@ English|中文
 
 # flymock
 
-flymock是一个可以将类直接生成模拟数据对象的java类库。它还可以将类转换为模拟数据模板，再由模拟数据模板生成JSON数据。flymock可以支持广泛的java类型，包含基本类型、复杂对象、泛型、枚举、嵌套泛型等。同时支持字段生成策略和多种占位符。
+Flymock is a Java class library that can generate mock data objects directly from class. It can also convert class into mock data templates, and then generate JSON data from mock data templates. Flymock can support a wide range of Java types, including basic types, complex objects, generics, enum, nested generics, and so on.
 
-## Flymock目标
+## Flymock goal
 
-* 提供直接由类型生成模拟Java对象，减少单元测试中new对象和设置值
-* 提供简单的template()和mock()方法，由类型转换为模拟数据模板和由类型直接转为模拟Java对象
-* 广泛的支持Java类型，包括Java泛型
-* 支持7种格式生成规则
-* 支持多样的占位符，例如@cparagraph()、@email()、@ip()、@province()，允许自定义占位符，可通过@FiledMock注解快速设置
-* 支持任意复杂的对象(包括深层嵌套和泛型嵌套、数组)
-* 支持字段全局模拟规则，可根据组织情况，定义个性化、真实性高的模拟数据(X)
+* Provide direct generation of mock Java object from types, reducing new object and setting value in unit test
+* Provide simple template() and mock() methods to convert from type to mock data template and directly from type to mock Java object
+* Wide-ranging support for Java types, including Java generics
+* Provide 7 Format Generation Rules
+* Provide multiple placeholders, such as @cparagraph (), @email (), @ip (), @province (), allowing custom placeholders to be quickly set through the @FiledMock annotation
+* Support for arbitrarily complex objects (including deep nesting and generic nesting, arrays)
+* Support global simulation rules for fields. Personalized and authentic simulation data can be defined according to the organization.(X)
 
-## Spring-boot-starter-flymock目标
+## Spring-boot-starter-flymock goal
 
-* 提供SpringBoot starter，与SpringBoot快速集成
-* 提供@EnableFlyMock和spring.fly.mock.enable参数来开关Stater
-* 基于SpringBoot Aop提供和@FlyMock注解，支持拦截类、拦截方法返回模拟Java对象
+* Provide SpringBoot Starter，fast integration with SpringBoot
+* Provide@EnableFlyMock and spring.fly.mock.enable parameter control Starter
+* Support interception classe and method to return mock Java object based on SpringBoot Aop and @FlyMock annotation
 
 ## Maven Setting
 
@@ -38,27 +38,35 @@ flymock是一个可以将类直接生成模拟数据对象的java类库。它还
 </dependency>
 ```
 
-## 转换关系
+## Documentation
 
-Java类型------>Java模板数据------>JSON数据<------>Java对象
+* Data Template Definition Specification
+* Data Template Generation Rules
+* Default Placeholder Rule
+* Project Structure Information
+* Api Documentation
 
-## 用法
+## Transformation relation
 
-#### Java类型生成Java对象
+Java Type------>Java template data------>JSON data<------>Java object
+
+## Usage
+
+#### Java type generate Java object
 
 ```java
-//基本类型,举例：Integer、Date等
+//Basic type，for example：Integer、Date etc
 Integer integerValue = TemplateMock.mock(new TypeReference<Integer>() {});
 Date dateValue = TemplateMock.mock(new TypeReference<Date>(){});
 ```
 
 ```java
-//嵌套复杂对象,举例：User
+//Nested complex objects, for example: User
 User userValue = TemplateMock.mock(new TypeReference<User>() {});
 ```
 
 ```java
-//泛型对象，举例：List<Stirng>
+//Generic object，for example：List<Stirng>
 List<String> listTValues = TemplateMock.mock(new TypeReference<List<String>>() {});
 ```
 
@@ -86,12 +94,12 @@ public class User {
 
     public static class Education {
         /**
-         * 教育名称
+         * Name of Education
          */
         private String name;
 
         /**
-         * 教育时间
+         * Education time
          */
         private Date date;
 
@@ -114,33 +122,33 @@ public class User {
 }
 ```
 
-### Java类型生成JSON数据
+### Java type generate JSON data
 
 ```java
 String userJson = TemplateMock.json(new TypeReference<User>() {});
 ```
 
-### Java类型生成Java模板数据
+### Java type generate Java template data
 
 ```java
 Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 ```
 
-### Java模板数据生成JSON数据
+### Java template data generate JSON data
 
 ```java
 Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 String userJson = template.mockToJson();
 ```
 
-### Java模板数据生成Java对象
+### Java template data generate Java object
 
 ```java
 Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 User user = template.mockType();
 ```
 
-### Java模板数据字符串生成Java对象
+### Java template data generate Java object
 
 ```java
 String infoTemplateJson = "{\"name\":\"@string()\",\"educations\":[{\"date\":1557457171390,\"name\":\"vhJ\"}]}";
@@ -148,12 +156,12 @@ Template<User> template = new Template<>(infoTemplateJson, new TypeReference<Use
 User user = template.mockType();
 ```
 
-### 设置生成策略和占位符
+### Sett generation strategy and placeholder
 
 ```java
 public class Room {
     
-    @FiledMock(strategy = "2", value = "邮箱是:@email()")
+    @FiledMock(strategy = "2", value = "email is:@email()")
     private String name;
 
     public String getName() {
@@ -168,10 +176,10 @@ public class Room {
 
 ```java
 Template<Room> template = TemplateMock.template(new TypeReference<Room>() {});
-Room user = template.mockType();//{"name":"邮箱是:ahu@163.com邮箱是:ahu@163.com","educations":[{"date":1557454313538,"name":"nz8k"}]}
+Room user = template.mockType();//{"name":"email is:ahu@163.comemail is:ahu@163.com","educations":[{"date":1557454313538,"name":"nz8k"}]}
 ```
 
-### 自定义占位符
+### Custom placeholder
 
 ```java
 public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<String> {
@@ -180,9 +188,9 @@ public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<Str
     public String invoke(PlaceholderWrap placeholderWrap) {
         List<String> args = placeholderWrap.getArgs();
         if(args.size() == 0) {
-            return  "《钢铁侠》";
+            return  "《Iron Man》";
         }else{
-            return  "《钢铁侠" + args.get(0) +"》";
+            return  "《Iron Man" + args.get(0) +"》";
         }
     }
 
@@ -194,7 +202,7 @@ public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<Str
 ```
 
 ```java
-//添加该电影占位符处理器
+//add the movie placeholder processor
 static {
     Mock.put(new MoviePlaceholderHandle());
 }
@@ -203,7 +211,7 @@ static {
 ```java
 public class Info {
 
-    @FiledMock(strategy = "2", value = "电影是:@movie(2)")
+    @FiledMock(strategy = "2", value = "movie is:@movie(2)")
     private String name;
 
     public String getName() {
@@ -218,12 +226,12 @@ public class Info {
 
 ```java
 Template<Info> template = TemplateMock.template(new TypeReference<Info>() {});
-Info user = template.mockType();//{"name":"电影是:《钢铁侠2》电影是:《钢铁侠2》","educations":[{"date":1557456720233,"name":"wdDK9"}]}
+Info user = template.mockType();//{"name":"movie is:《Iron Man2》movie :《Iron Man2》","educations":[{"date":1557456720233,"name":"wdDK9"}]}
 ```
 
-## Spring-boot-starter-flymock用法
+## Spring-boot-starter-flymock Usage
 
-### 开启starter
+### Enable starter
 
 ```java
 @SpringBootApplication
@@ -236,7 +244,7 @@ public class Application {
 }
 ```
 
-### 拦截并模拟类的所有方法返回值
+### Intercept and mock all method return value of a class
 
 ```java
 @Component
@@ -258,7 +266,7 @@ String str = someMethod.sayString();
 User user = someMethod.sayUser();
 ```
 
-### 拦截并模拟单个方法返回值
+### Intercept and simulate the return value of a single method
 
 ```java
 @Component
@@ -279,7 +287,7 @@ public class SomeMethod {
 User user = someMethod.sayUser();
 ```
 
-### SpringBoot自定义占位符
+### SpringBoot Custom placeholder
 
 ```java
 @Component
@@ -289,9 +297,9 @@ public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<Str
     public String invoke(PlaceholderWrap placeholderWrap) {
         List<String> args = placeholderWrap.getArgs();
         if(args.size() == 0) {
-            return  "《钢铁侠》";
+            return  "《Iron Man》";
         }else{
-            return  "《钢铁侠" + args.get(0) +"》";
+            return  "《Iron Man" + args.get(0) +"》";
         }
     }
 
@@ -302,11 +310,6 @@ public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<Str
 }
 ```
 
-## 更多文档
+## Thank & Contributor
 
-- [默认支持占位符](doc/chinese/placeholder.md)
-- [数据模板定义规范](doc/chinese/standard.md)
-
-## 感谢 & 贡献者
-
-FlyMock参考了Mock.js，模板JSON规范基本互相支持(不完全相同)，可以看做是java版本的增强和扩展.
+FlyMock refer to Mock.js, and the template JSON specification basically support each other (but not exactly the same), which can be seen as an enhancement and extension of the Java version.
