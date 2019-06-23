@@ -75,6 +75,7 @@ public class AspectMethodTest extends Base{
     @Test
     public void aDouble() {
         Double aDouble = aspectMethod.aDouble();
+        System.out.println("测试---" + aDouble);
         Assert.assertNotNull(aDouble);
     }
 

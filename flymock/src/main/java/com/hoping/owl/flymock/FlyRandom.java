@@ -99,11 +99,19 @@ public class FlyRandom {
 
     /**
      * boolean
+     * @return true/false
      */
     public static Boolean booleanRandom() {
         return booleanRandom(1, 1, true);
     }
 
+    /**
+     * boolean Random
+     * @param min min
+     * @param max max
+     * @param bl bl
+     * @return true/false
+     */
     public static Boolean booleanRandom(Integer min, Integer max, Boolean bl) {
         if (null != bl) {
             min = (null == min) ? 1 : min;

@@ -3,11 +3,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.hoping.owl</groupId>
+    <!--Central Warehouse Release-->
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <tag>master</tag>
+        <url>git@github.com:v2hoping/flymock.git</url>
+        <connection>scm:git:git@github.com:v2hoping/flymock.git</connection>
+        <developerConnection>scm:git:git@github.com:v2hoping/flymock.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>houping wang</name>
+            <email>whp1473@163.com</email>
+            <organization>v2hoping</organization>
+        </developer>
+    </developers>
+    <!--Central Warehouse Release-->
+    <groupId>com.v2hoping</groupId>
     <artifactId>flymock-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
     <modules>
         <module>flymock</module>
         <module>spring-boot-starter-flymock</module>
@@ -16,16 +42,18 @@
     <name>flymock-parent</name>
 
     <properties>
+        <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.version>2.0.4.RELEASE</spring-boot.version>
         <version.compiler-plugin>3.5.1</version.compiler-plugin>
         <version.source-plugin>2.4</version.source-plugin>
         <version.javadoc-plugin>2.9.1</version.javadoc-plugin>
-        <version.maven-gpg-plugin>1.5</version.maven-gpg-plugin>
         <fastjson.version>1.2.54</fastjson.version>
         <junit.version>4.12</junit.version>
         <logback.version>1.2.3</logback.version>
+        <gpg.executable>gpg</gpg.executable>
+        <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
     </properties>
 
     <dependencyManagement>
@@ -62,28 +90,6 @@
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-archetype-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.0</version>
-                <!-- 绑定source插件到Maven的生命周期,并在生命周期后执行绑定的source的goal -->
-                <executions>
-                    <execution>
-                        <!-- 绑定source插件到Maven的生命周期 -->
-                        <phase>compile</phase>
-                        <!--在生命周期后执行绑定的source插件的goals -->
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -98,23 +104,36 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>${version.source-plugin}</version>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.5</version>
                     <executions>
                         <execution>
-                            <phase>package</phase>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
                             <goals>
-                                <goal>jar-no-fork</goal>
+                                <goal>sign</goal>
                             </goals>
                         </execution>
                     </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-archetype-plugin</artifactId>
-                    <version>2.4</version>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.7</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <additionalparam>-Xdoclint:none</additionalparam>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
+
 </project>
