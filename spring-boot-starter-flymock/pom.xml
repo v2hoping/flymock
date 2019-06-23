@@ -5,7 +5,7 @@
     <parent>
         <artifactId>flymock-parent</artifactId>
         <groupId>com.v2hoping</groupId>
-        <version>0.1.1-SNAPSHOT</version>
+        <version>0.1.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +15,7 @@
     <url>http://www.example.com</url>
 
     <properties>
-        <flymock.version>0.1.1-SNAPSHOT</flymock.version>
+        <flymock.version>0.1.1</flymock.version>
     </properties>
 
     <dependencies>
