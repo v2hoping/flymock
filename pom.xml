@@ -29,6 +29,7 @@
             <organization>v2hoping</organization>
         </developer>
     </developers>
+
     <!--Central Warehouse Release-->
     <groupId>com.v2hoping</groupId>
     <artifactId>flymock-parent</artifactId>
