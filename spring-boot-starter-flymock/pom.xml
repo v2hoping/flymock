@@ -18,7 +18,6 @@
         <flymock.version>0.1.1-SNAPSHOT</flymock.version>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
