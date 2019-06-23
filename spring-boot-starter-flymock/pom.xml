@@ -15,7 +15,7 @@
     <url>http://www.example.com</url>
 
     <properties>
-        <flymock.version>0.1.0-SNAPSHOT</flymock.version>
+        <flymock.version>0.1.1-SNAPSHOT</flymock.version>
     </properties>
 
 
@@ -34,7 +34,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.hoping.owl</groupId>
+            <groupId>com.v2hoping</groupId>
             <artifactId>flymock</artifactId>
             <version>${flymock.version}</version>
         </dependency>
