@@ -24,17 +24,17 @@ flymock是一个可以将类直接生成模拟数据对象的java类库。它还
 
 ```xml
 <dependency>
-   <groupId>com.hoping.owl</groupId>
+   <groupId>com.v2hoping</groupId>
    <artifactId>flymock</artifactId>
-   <version>0.1.0</version>
+   <version>0.1.1</version>
 </dependency>
 ```
 
 ```xml
 <dependency>
-   <groupId>com.hoping.owl</groupId>
+   <groupId>com.v2hoping</groupId>
    <artifactId>spring-boot-starter-flymock</artifactId>
-   <version>0.1.0</version>
+   <version>0.1.1</version>
 </dependency>
 ```
 
