@@ -1,4 +1,4 @@
-English|中文
+[English](https://github.com/v2hoping/flymock/blob/master/doc/english/Readme.md)|[中文](https://github.com/v2hoping/flymock/blob/master/README.md)
 
 # flymock
 
