@@ -52,12 +52,11 @@ Java Type------>Java template data------>JSON data<------>Java object
 
 ## Usage
 
-#### Java type generate Java object
+**Java type generate Java object**
 
 ```java
-//Basic type，for example：Integer、Date etc
+//Basic type，for example：Integer
 Integer integerValue = TemplateMock.mock(new TypeReference<Integer>() {});
-Date dateValue = TemplateMock.mock(new TypeReference<Date>(){});
 ```
 
 ```java
@@ -122,33 +121,31 @@ public class User {
 }
 ```
 
-### Java type generate JSON data
+**Java type generate JSON data**
 
 ```java
 String userJson = TemplateMock.json(new TypeReference<User>() {});
 ```
 
-### Java type generate Java template data
+**Java type generate Java template data**
 
 ```java
 Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 ```
 
-### Java template data generate JSON data
+**Java template data generate JSON data**
 
 ```java
-Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 String userJson = template.mockToJson();
 ```
 
-### Java template data generate Java object
+**Java template data generate Java object**
 
 ```java
-Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 User user = template.mockType();
 ```
 
-### Java template data generate Java object
+**Java template data generate Java object**
 
 ```java
 String infoTemplateJson = "{\"name\":\"@string()\",\"educations\":[{\"date\":1557457171390,\"name\":\"vhJ\"}]}";
@@ -156,7 +153,7 @@ Template<User> template = new Template<>(infoTemplateJson, new TypeReference<Use
 User user = template.mockType();
 ```
 
-### Sett generation strategy and placeholder
+**Sett generation strategy and placeholder**
 
 ```java
 public class Room {
@@ -172,14 +169,12 @@ public class Room {
         this.name = name;
     }
 }
-```
 
-```java
 Template<Room> template = TemplateMock.template(new TypeReference<Room>() {});
 Room user = template.mockType();//{"name":"email is:ahu@163.comemail is:ahu@163.com","educations":[{"date":1557454313538,"name":"nz8k"}]}
 ```
 
-### Custom placeholder
+**Custom placeholder**
 
 ```java
 public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<String> {
@@ -199,9 +194,7 @@ public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<Str
         return "movie";
     }
 }
-```
 
-```java
 //add the movie placeholder processor
 static {
     Mock.put(new MoviePlaceholderHandle());
@@ -231,7 +224,7 @@ Info user = template.mockType();//{"name":"movie is:《Iron Man2》movie :《Iro
 
 ## Spring-boot-starter-flymock Usage
 
-### Enable starter
+**Enable starter**
 
 ```java
 @SpringBootApplication
@@ -244,7 +237,7 @@ public class Application {
 }
 ```
 
-### Intercept and mock all method return value of a class
+**Intercept and mock all method return value of a class**
 
 ```java
 @Component
@@ -259,14 +252,12 @@ public class SomeMethod {
         return null;
     }
 }
-```
 
-```java
 String str = someMethod.sayString();
 User user = someMethod.sayUser();
 ```
 
-### Intercept and simulate the return value of a single method
+**Intercept and simulate the return value of a single method**
 
 ```java
 @Component
@@ -281,13 +272,11 @@ public class SomeMethod {
         return null;
     }
 }
-```
 
-```java
 User user = someMethod.sayUser();
 ```
 
-### SpringBoot Custom placeholder
+**SpringBoot Custom placeholder**
 
 ```java
 @Component

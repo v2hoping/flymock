@@ -44,12 +44,11 @@ Java类型------>Java模板数据------>JSON数据<------>Java对象
 
 ## 用法
 
-#### Java类型生成Java对象
+**Java类型生成Java对象**
 
 ```java
-//基本类型,举例：Integer、Date等
+//基本类型,举例：Integer
 Integer integerValue = TemplateMock.mock(new TypeReference<Integer>() {});
-Date dateValue = TemplateMock.mock(new TypeReference<Date>(){});
 ```
 
 ```java
@@ -114,33 +113,31 @@ public class User {
 }
 ```
 
-### Java类型生成JSON数据
+**Java类型生成JSON数据**
 
 ```java
 String userJson = TemplateMock.json(new TypeReference<User>() {});
 ```
 
-### Java类型生成Java模板数据
+**Java类型生成Java模板**
 
 ```java
 Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 ```
 
-### Java模板数据生成JSON数据
+**Java模板生成JSON数据**
 
 ```java
-Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 String userJson = template.mockToJson();
 ```
 
-### Java模板数据生成Java对象
+**Java模板生成Java对象**
 
 ```java
-Template<User> template = TemplateMock.template(new TypeReference<User>() {});
 User user = template.mockType();
 ```
 
-### Java模板数据字符串生成Java对象
+**Java模板字符串生成Java对象**
 
 ```java
 String infoTemplateJson = "{\"name\":\"@string()\",\"educations\":[{\"date\":1557457171390,\"name\":\"vhJ\"}]}";
@@ -148,7 +145,7 @@ Template<User> template = new Template<>(infoTemplateJson, new TypeReference<Use
 User user = template.mockType();
 ```
 
-### 设置生成策略和占位符
+**设置生成策略和占位符**
 
 ```java
 public class Room {
@@ -164,14 +161,12 @@ public class Room {
         this.name = name;
     }
 }
-```
 
-```java
 Template<Room> template = TemplateMock.template(new TypeReference<Room>() {});
 Room user = template.mockType();//{"name":"邮箱是:ahu@163.com邮箱是:ahu@163.com","educations":[{"date":1557454313538,"name":"nz8k"}]}
 ```
 
-### 自定义占位符
+**自定义占位符**
 
 ```java
 public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<String> {
@@ -191,13 +186,8 @@ public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<Str
         return "movie";
     }
 }
-```
 
-```java
-//添加该电影占位符处理器
-static {
-    Mock.put(new MoviePlaceholderHandle());
-}
+Mock.put(new MoviePlaceholderHandle());
 ```
 
 ```java
@@ -214,16 +204,14 @@ public class Info {
         this.name = name;
     }
 }
-```
 
-```java
 Template<Info> template = TemplateMock.template(new TypeReference<Info>() {});
 Info user = template.mockType();//{"name":"电影是:《钢铁侠2》电影是:《钢铁侠2》","educations":[{"date":1557456720233,"name":"wdDK9"}]}
 ```
 
 ## Spring-boot-starter-flymock用法
 
-### 开启starter
+**开启starter**
 
 ```java
 @SpringBootApplication
@@ -236,7 +224,7 @@ public class Application {
 }
 ```
 
-### 拦截并模拟类的所有方法返回值
+**拦截并模拟类的所有方法返回值**
 
 ```java
 @Component
@@ -251,14 +239,12 @@ public class SomeMethod {
         return null;
     }
 }
-```
 
-```java
 String str = someMethod.sayString();
 User user = someMethod.sayUser();
 ```
 
-### 拦截并模拟单个方法返回值
+**拦截并模拟单个方法返回值**
 
 ```java
 @Component
@@ -273,13 +259,11 @@ public class SomeMethod {
         return null;
     }
 }
-```
 
-```java
 User user = someMethod.sayUser();
 ```
 
-### SpringBoot自定义占位符
+**SpringBoot自定义占位符**
 
 ```java
 @Component
