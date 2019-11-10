@@ -234,6 +234,9 @@ public class TemplateMock {
                 instance = new ArrayList<>();
             } else if (Set.class == targetClass) {
                 instance = new HashSet<>();
+            } else {
+                //默认collection
+                instance = new ArrayList<>();
             }
         } else {
             try {

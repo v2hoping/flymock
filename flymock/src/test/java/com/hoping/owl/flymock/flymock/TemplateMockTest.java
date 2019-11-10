@@ -54,8 +54,6 @@ public class TemplateMockTest {
         });
         printTest(new TypeReference<StrategyType>() {
         });
-
-
     }
 
     @Test
