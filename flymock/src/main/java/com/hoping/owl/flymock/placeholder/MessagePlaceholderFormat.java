@@ -29,10 +29,6 @@ public class MessagePlaceholderFormat {
      */
     private static final int IDE_PARAM = 2;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessagePlaceholderFormat.class);
-
-    private static final long serialVersionUID = 6479157306784022952L;
-
     private static PlaceholderManager placeholderManager = null;
 
     static {
