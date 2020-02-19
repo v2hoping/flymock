@@ -76,13 +76,6 @@ public class Mock {
         }
     }
 
-    /**
-     * 设置Mock全局配置
-     */
-    public static void setup(MockConfig mockConfig) {
-        MessagePlaceholderFormat.setPlaceholderManager(new LocalPlaceholderManager(mockConfig.getScanPackage()));
-    }
-
     public static <T> void put(PlaceholderHandle<T> placeholderHandle) {
         MessagePlaceholderFormat.put(placeholderHandle);
     }

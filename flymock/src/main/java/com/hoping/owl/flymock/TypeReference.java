@@ -13,6 +13,23 @@ import java.util.Map;
  * @author houping wang
  */
 public class TypeReference<T> {
+
+    /**
+     * 循环嵌套展示层级
+     * 默认1层
+     */
+    private int nestLimit = 1;
+
+    /**
+     * 策略Map
+     */
+    private Map<String, String> keyStrategyMap;
+
+    /**
+     * 类型默认模板
+     */
+    private String defaultTemplate;
+
     /**
      * T 带泛型的类型
      */
@@ -133,5 +150,37 @@ public class TypeReference<T> {
             }
         }
         return new TypeReference<>(Object.class, this);
+    }
+
+    public int getNestLimit() {
+        return nestLimit;
+    }
+
+    public Map<String, String> getKeyStrategyMap() {
+        return keyStrategyMap;
+    }
+
+    public String getDefaultTemplate() {
+        return defaultTemplate;
+    }
+
+    public Constructor<?> getConstructor() {
+        return constructor;
+    }
+
+    public TypeReference getPrentTypeReference() {
+        return prentTypeReference;
+    }
+
+    public void setNestLimit(int nestLimit) {
+        this.nestLimit = nestLimit;
+    }
+
+    public void setKeyStrategyMap(Map<String, String> keyStrategyMap) {
+        this.keyStrategyMap = keyStrategyMap;
+    }
+
+    public void setDefaultTemplate(String defaultTemplate) {
+        this.defaultTemplate = defaultTemplate;
     }
 }

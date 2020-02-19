@@ -28,6 +28,18 @@ public class TemplateMock {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TemplateMock.class);
 
+    public static <T> Template<T> template(TypeReference<T> t) {
+        return new Template<>(jsonTemplate(t), t);
+    }
+
+    public static <T> T mock(TypeReference<T> t) {
+        return new Template<>(jsonTemplate(t), t).mockType();
+    }
+
+    public static <T> String json(TypeReference<T> t) {
+        return new Template<>(jsonTemplate(t), t).mockToJson();
+    }
+
     private static <T> Object jsonTemplate(Class<?> cls, TypeReference<?> typeReference) {
         return TemplateMock.jsonTemplate(new TypeReference<T>(cls, typeReference) {
         });
@@ -169,18 +181,6 @@ public class TemplateMock {
 
     private static <T> Object jsonTemplate(Type type, TypeReference<?> parentType) {
         return TemplateMock.jsonTemplate(new TypeReference<T>(type, parentType) {});
-    }
-
-    public static <T> Template<T> template(TypeReference<T> t) {
-        return new Template<>(jsonTemplate(t), t);
-    }
-
-    public static <T> T mock(TypeReference<T> t) {
-        return new Template<>(jsonTemplate(t), t).mockType();
-    }
-
-    public static <T> String json(TypeReference<T> t) {
-        return new Template<>(jsonTemplate(t), t).mockToJson();
     }
 
     /**
