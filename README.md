@@ -288,8 +288,8 @@ public static class MoviePlaceholderHandle extends AbstractPlaceholderHandle<Str
 
 ## 更多文档
 
-- [默认支持占位符](doc/cn/placeholder.md)
 - [数据模板定义规范](doc/cn/standard.md)
+- [默认支持占位符](doc/cn/placeholder.md)
 - [配置文件](doc/cn/config.md)
 
 ## 感谢 & 贡献者

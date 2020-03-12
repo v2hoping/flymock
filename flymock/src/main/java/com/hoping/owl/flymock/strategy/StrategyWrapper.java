@@ -90,17 +90,17 @@ public class StrategyWrapper {
                 }
             } else if (characters.size() == 5) {
                 if (SEPATATOR_BAR.equals(characters.get(1)) && SEPATATOR_COMMA.equals(characters.get(3))) {
-                    this.strategyType = StrategyType.COUNT_DMIN_DMAX;
-                    this.count = Integer.parseInt(characters.get(0));
-                    this.dmin = Integer.parseInt(characters.get(2));
-                    this.dmax = Integer.parseInt(characters.get(4));
-                    return;
-                }
-                if (SEPATATOR_COMMA.equals(characters.get(1))) {
                     this.strategyType = StrategyType.MIN_MAX_DCOUNT;
                     this.min = Integer.parseInt(characters.get(0));
                     this.max = Integer.parseInt(characters.get(2));
                     this.dcount = Integer.parseInt(characters.get(4));
+                    return;
+                }
+                if (SEPATATOR_COMMA.equals(characters.get(1))) {
+                    this.strategyType = StrategyType.COUNT_DMIN_DMAX;
+                    this.count = Integer.parseInt(characters.get(0));
+                    this.dmin = Integer.parseInt(characters.get(2));
+                    this.dmax = Integer.parseInt(characters.get(4));
                     return;
                 }
             } else if (characters.size() == 7
