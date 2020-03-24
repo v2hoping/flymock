@@ -8,7 +8,7 @@ import org.junit.Test;
  * 回归测试
  * @author houping wang
  */
-public class PlachholderTest {
+public class StandardTest {
 
     //** String **
     @Test
