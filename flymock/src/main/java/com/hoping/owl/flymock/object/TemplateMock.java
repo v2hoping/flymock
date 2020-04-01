@@ -7,6 +7,7 @@ import com.hoping.owl.flymock.TypeReference;
 import com.hoping.owl.flymock.annotation.FiledMock;
 import com.hoping.owl.flymock.constants.TypeEnum;
 import com.hoping.owl.flymock.placeholder.MessagePlaceholderFormat;
+import com.hoping.owl.flymock.rule.Rule;
 import com.hoping.owl.flymock.strategy.StrategyUtil;
 import com.hoping.owl.flymock.util.ClassUtil;
 import com.hoping.owl.flymock.util.StringUtil;
@@ -40,12 +41,31 @@ public class TemplateMock {
         return new Template<>(jsonTemplate(t), t).mockToJson();
     }
 
+    public static <T> Template<T> template(TypeReference<T> t, Rule rule) {
+        return new Template<>(jsonTemplate(t, rule), t);
+    }
+
+    public static <T> T mock(TypeReference<T> t, Rule rule) {
+        return new Template<>(jsonTemplate(t, rule), t).mockType();
+    }
+
+    public static <T> String json(TypeReference<T> t, Rule rule) {
+        return new Template<>(jsonTemplate(t, rule), t).mockToJson();
+    }
+
     private static <T> Object jsonTemplate(Class<?> cls, TypeReference<?> typeReference) {
-        return TemplateMock.jsonTemplate(new TypeReference<T>(cls, typeReference) {
-        });
+        return TemplateMock.jsonTemplate(new TypeReference<T>(cls, typeReference) {});
     }
 
     private static <T> Object jsonTemplate(TypeReference<T> t) {
+        return jsonTemplate(t, null);
+    }
+
+    private static <T> Object jsonTemplate(TypeReference<T> t, Rule rule) {
+        //检查
+        if(!t.checkNestTwo()) {
+            return null;
+        }
         //初始化所有类型，包含泛型、真实类型、包裹泛型
         Class<?> rawClass = t.getActualClass();
         Type[] argTypes = t.getArgTypes();
@@ -121,6 +141,7 @@ public class TemplateMock {
             }
             FiledMock filedMock = field.getAnnotation(FiledMock.class);
             String key = fieldName;
+            //注解配置
             if (filedMock != null) {
                 //设置策略key
                 key = StrategyUtil.addKeyStrategy(fieldName, filedMock.strategy());
@@ -133,6 +154,14 @@ public class TemplateMock {
                 Class actualClass = new TypeReference(field.getGenericType(), t).getActualClass();
                 if(matchingPlaceholderAndReturnClass(placeholderClass, actualClass)) {
                     instance.put(key, newValue);
+                    continue;
+                }
+            }
+            //全局配置
+            if(rule != null && rule.isFlag()) {
+                String placeholder = rule.getPlaceholder(key);
+                if(null != placeholder) {
+                    instance.put(key, placeholder);
                     continue;
                 }
             }

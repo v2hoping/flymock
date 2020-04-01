@@ -339,5 +339,111 @@ Mock.mock("@ctitle(3)"); ——> 重号期所并克 去之又成海 广样据建
 Mock.mock("@ctitle(3,5)"); ——> 花和毛 农音叫什认 们统广 真般连好 产效过半约导维
 ```
 
-### first()
-生成英文姓氏，String类型
+### @first()
+生成英文姓，String类型
+``` java 
+Mock.mock("@first()"); ——> Margaret
+```
+
+### @last()
+生成英文名，String类型
+``` java 
+Mock.mock("@last()"); ——> Thomas
+```
+
+### @name()
+生成英文姓名，String类型
+``` java 
+Mock.mock("@name()"); ——> Sandra Allen
+```
+
+### @cfirst()
+生成中文姓，String类型
+``` java 
+Mock.mock("@cfirst()"); ——> 宋
+```
+
+### @clast()
+生成中文名，String类型
+``` java 
+Mock.mock("@clast()"); ——> 勇
+```
+
+### @cname()
+生成中文姓名，String类型
+``` java 
+Mock.mock("@cname()"); ——> 林桂英
+```
+
+### @url()
+生成网址
+``` java 
+Mock.mock("@url()"); ——> news://ueemgdkonf.cy/voar
+```
+
+### @domain()
+生成域名
+``` java 
+Mock.mock("@domain()"); ——> zsvrozsknw.tg
+```
+
+### @protocol()
+生成协议
+``` java 
+Mock.mock("@protocol()"); ——> telnet
+```
+
+### @tld()
+``` java 
+Mock.mock("@tld()"); ——> kn
+```
+
+### @email()
+生成邮箱
+``` java
+Mock.mock("@email()"); ——> uxgitg@tskaumssvv.ht 
+```
+
+### @ip()
+生成IP地址
+``` java
+Mock.mock("@ip()"); ——> 115.231.255.141 
+```
+
+### @region()
+生成中国地区
+``` java
+Mock.mock("@region()"); ——> 东北
+```
+
+### @province()
+生成中国省份
+``` java
+Mock.mock("@province()"); ——> 山东省
+```
+
+### @city()
+生成中国市
+``` java
+Mock.mock("@city()"); ——> 日照市 
+```
+生成带有省份的中国市
+``` java
+Mock.mock("@city()"); ——> 海南省 海口市 
+```
+
+### @county()
+生成中国县/区
+``` java
+Mock.mock("@county()"); ——> 二七区
+```
+生成带有省份、市、县/区
+``` java
+Mock.mock("@county()"); ——> 新疆维吾尔自治区 喀什地区 疏附县
+```
+
+### @zip()
+``` java
+Mock.mock("@zip()"); ——> 710701
+```
+

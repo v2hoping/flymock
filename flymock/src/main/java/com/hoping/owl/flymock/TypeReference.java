@@ -15,12 +15,6 @@ import java.util.Map;
 public class TypeReference<T> {
 
     /**
-     * 循环嵌套展示层级
-     * 默认1层
-     */
-    private int nestLimit = 1;
-
-    /**
      * 策略Map
      */
     private Map<String, String> keyStrategyMap;
@@ -98,6 +92,27 @@ public class TypeReference<T> {
         }
     }
 
+    /**
+     * 检查嵌套循环,嵌套次数大于1则返回false
+     */
+    public boolean checkNestTwo() {
+        return this.checkNest(this) < 2;
+    }
+
+    public int checkNest(TypeReference typeReference) {
+        int count = 0;
+        if(prentTypeReference == null) {
+            return count;
+        }
+        Class currentClass = typeReference.getActualClass();
+        Class parentClass = prentTypeReference.getActualClass();
+        if(currentClass == parentClass) {
+            count ++;
+        }
+        count += prentTypeReference.checkNest(typeReference);
+        return count;
+    }
+
     protected TypeReference(Class<T> clz, TypeReference prentTypeReference) {
         this.type = clz;
         this.prentTypeReference = prentTypeReference;
@@ -152,10 +167,6 @@ public class TypeReference<T> {
         return new TypeReference<>(Object.class, this);
     }
 
-    public int getNestLimit() {
-        return nestLimit;
-    }
-
     public Map<String, String> getKeyStrategyMap() {
         return keyStrategyMap;
     }
@@ -170,10 +181,6 @@ public class TypeReference<T> {
 
     public TypeReference getPrentTypeReference() {
         return prentTypeReference;
-    }
-
-    public void setNestLimit(int nestLimit) {
-        this.nestLimit = nestLimit;
     }
 
     public void setKeyStrategyMap(Map<String, String> keyStrategyMap) {
