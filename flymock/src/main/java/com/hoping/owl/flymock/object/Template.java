@@ -13,12 +13,9 @@ public class Template<T> {
 
     private final String originTemplate;
 
-    private final Object objectTemplate;
-
     private final TypeReference<T> t;
 
     public Template(Object objectTemplate, TypeReference<T> t) {
-        this.objectTemplate = objectTemplate;
         if (objectTemplate instanceof String) {
             this.originTemplate = (String) objectTemplate;
         } else if (objectTemplate == null) {

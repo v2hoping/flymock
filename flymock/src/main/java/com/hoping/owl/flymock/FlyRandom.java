@@ -136,6 +136,11 @@ public class FlyRandom {
     public static Integer natural(Integer min, Integer max) {
         min = (null == min || min < 0) ? ZERO : min;
         max = (null == max || max >= Integer.MAX_VALUE - 1) ? Integer.MAX_VALUE - 1 : max;
+        if(min > max) {
+            Integer tmp = min;
+            min = max;
+            max = tmp;
+        }
         return new Random().nextInt(max - min + 1) + min;
     }
 
@@ -176,6 +181,10 @@ public class FlyRandom {
     }
 
     public static Double doubleRandom(Integer min, Integer max, Integer dMin, Integer dMax) {
+        return Double.parseDouble(doubleRandomStr(min, max, dMin, dMax));
+    }
+
+    public static String doubleRandomStr(Integer min, Integer max, Integer dMin, Integer dMax) {
         Integer first = integer(min, max);
         dMin = Math.max(Math.min(dMin, 17), 0);
         dMax = Math.max(Math.min(dMax, 17), 0);
@@ -188,7 +197,7 @@ public class FlyRandom {
             }
             sb.append(i == (count - 1) ? character("123456789") : character("number"));
         }
-        return Double.parseDouble(sb.toString());
+        return sb.toString();
     }
 
     /*************

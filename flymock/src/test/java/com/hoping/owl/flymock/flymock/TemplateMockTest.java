@@ -54,8 +54,6 @@ public class TemplateMockTest {
         });
         printTest(new TypeReference<StrategyType>() {
         });
-
-
     }
 
     @Test
@@ -158,6 +156,8 @@ public class TemplateMockTest {
         printTest(new TypeReference<UserA<String>>() {
         });
     }
+
+//    public void
 
     public static class UserA<A> {
         private UserNM<A, A> t;

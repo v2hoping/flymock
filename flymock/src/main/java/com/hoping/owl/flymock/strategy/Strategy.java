@@ -244,7 +244,7 @@ public class Strategy {
         @Override
         Object resolveDependStrategy(ValueWrapper generateWrapper) {
             if (generateWrapper.belongNumber()) {
-                return new BigDecimal(FlyRandom.doubleRandom(min, max, dmin, dMax));
+                return new BigDecimal(FlyRandom.doubleRandomStr(min, max, dmin, dMax));
             }
             return generateWrapper.getOriginValue();
         }
@@ -267,7 +267,7 @@ public class Strategy {
         @Override
         Object resolveDependStrategy(ValueWrapper generateWrapper) {
             if (generateWrapper.belongNumber()) {
-                return new BigDecimal(FlyRandom.doubleRandom(min, max, dcount, dcount));
+                return new BigDecimal(FlyRandom.doubleRandomStr(min, max, dcount, dcount));
             }
             return generateWrapper.getOriginValue();
         }
@@ -290,7 +290,7 @@ public class Strategy {
         @Override
         Object resolveDependStrategy(ValueWrapper generateWrapper) {
             if (generateWrapper.belongNumber()) {
-                return new BigDecimal(FlyRandom.doubleRandom(count, count, dmin, dmax));
+                return new BigDecimal(FlyRandom.doubleRandomStr(count, count, dmin, dmax));
             }
             return generateWrapper.getOriginValue();
         }
@@ -310,7 +310,7 @@ public class Strategy {
         @Override
         Object resolveDependStrategy(ValueWrapper generateWrapper) {
             if (generateWrapper.belongNumber()) {
-                return new BigDecimal(FlyRandom.doubleRandom(count, count, dcount, dcount));
+                return new BigDecimal(FlyRandom.doubleRandomStr(count, count, dcount, dcount));
             }
             return generateWrapper.getOriginValue();
         }

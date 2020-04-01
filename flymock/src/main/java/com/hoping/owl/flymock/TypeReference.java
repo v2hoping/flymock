@@ -13,6 +13,17 @@ import java.util.Map;
  * @author houping wang
  */
 public class TypeReference<T> {
+
+    /**
+     * 策略Map
+     */
+    private Map<String, String> keyStrategyMap;
+
+    /**
+     * 类型默认模板
+     */
+    private String defaultTemplate;
+
     /**
      * T 带泛型的类型
      */
@@ -81,6 +92,27 @@ public class TypeReference<T> {
         }
     }
 
+    /**
+     * 检查嵌套循环,嵌套次数大于1则返回false
+     */
+    public boolean checkNestTwo() {
+        return this.checkNest(this) < 2;
+    }
+
+    public int checkNest(TypeReference typeReference) {
+        int count = 0;
+        if(prentTypeReference == null) {
+            return count;
+        }
+        Class currentClass = typeReference.getActualClass();
+        Class parentClass = prentTypeReference.getActualClass();
+        if(currentClass == parentClass) {
+            count ++;
+        }
+        count += prentTypeReference.checkNest(typeReference);
+        return count;
+    }
+
     protected TypeReference(Class<T> clz, TypeReference prentTypeReference) {
         this.type = clz;
         this.prentTypeReference = prentTypeReference;
@@ -133,5 +165,29 @@ public class TypeReference<T> {
             }
         }
         return new TypeReference<>(Object.class, this);
+    }
+
+    public Map<String, String> getKeyStrategyMap() {
+        return keyStrategyMap;
+    }
+
+    public String getDefaultTemplate() {
+        return defaultTemplate;
+    }
+
+    public Constructor<?> getConstructor() {
+        return constructor;
+    }
+
+    public TypeReference getPrentTypeReference() {
+        return prentTypeReference;
+    }
+
+    public void setKeyStrategyMap(Map<String, String> keyStrategyMap) {
+        this.keyStrategyMap = keyStrategyMap;
+    }
+
+    public void setDefaultTemplate(String defaultTemplate) {
+        this.defaultTemplate = defaultTemplate;
     }
 }

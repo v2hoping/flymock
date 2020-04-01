@@ -51,7 +51,7 @@ public class ClassUtil {
         if (clazz == char.class || clazz == Character.class) {
             return TypeEnum.CHAR;
         }
-        if(clazz == Enum.class) {
+        if (clazz == Enum.class) {
             return TypeEnum.ENUM;
         }
         return TypeEnum.OBJECT;
@@ -234,9 +234,7 @@ public class ClassUtil {
         // 获取指定接口的实现类
         if (clazz.isInterface()) {
             try {
-                /**
-                 * 循环判断路径下的所有类是否继承了指定类 并且排除父类自己
-                 */
+                //循环判断路径下的所有类是否继承了指定类 并且排除父类自己
                 for (Class<?> cls : classesAll) {
                     /*
                      * isAssignableFrom该方法的解析，请参考博客：

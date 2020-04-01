@@ -1,4 +1,4 @@
-package com.hoping.owl.flymock.flymock;
+package com.hoping.owl.flymock.release;
 
 import com.hoping.owl.flymock.Mock;
 import org.junit.Assert;
@@ -11,17 +11,12 @@ import org.junit.Test;
  */
 public class PlaceholderTest {
 
-    private Object print(Object o) {
-        Object mock = Mock.mock(o);
-        System.out.println(mock);
-        Assert.assertNotEquals(mock, o);
-        return mock;
-    }
-
     @Test
     public void booleanTest() {
-        Object print = print("@boolean()");
-        Assert.assertTrue(print instanceof Boolean);
+        Object var = print("@boolean()");
+        Assert.assertTrue(var instanceof Boolean);
+        Object var1 = print("@boolean(1,9,true)");
+        Assert.assertTrue(var1 instanceof Boolean);
     }
 
     @Test
@@ -32,7 +27,12 @@ public class PlaceholderTest {
 
     @Test
     public void character() {
-        Object print = print("@character()");
+        print("@character()");
+        print("@character(lower)");
+        print("@character(upper)");
+        print("@character(number)");
+        print("@character(symbol)");
+        print("@character(aeiou)");
     }
 
     @Test
@@ -79,13 +79,14 @@ public class PlaceholderTest {
     @Test
     public void ctitle() {
         print("@ctitle()");
-        print("@ctitle(5)");
+        print("@ctitle(3)");
         print("@ctitle(3,5)");
     }
 
     @Test
     public void cword() {
         print("@cword()");
+        print("@cword(3)");
         print("@cword(零一二三四五六七八九十)");
         print("@cword(零一二三四五六七八九十,3)");
         print("@cword(3,5)");
@@ -94,13 +95,16 @@ public class PlaceholderTest {
 
     @Test
     public void date() {
-        print("@ctitle()");
-        print("@ctitle(5)");
-        print("@ctitle(3,5)");
+        print("@date()");
     }
 
     @Test
     public void datetime() {
+        print("@datetime(yyyy-MM-dd HH:mm:ss)");
+        print("@datetime(yy-MM-dd a HH:mm:ss)");
+        print("@datetime(y-MM-dd HH:mm:ss)");
+        print("@datetime(y-M-d H:m:s)");
+        print("@datetime(HH:mm:ss)");
         print("@datetime()");
     }
 
@@ -186,8 +190,13 @@ public class PlaceholderTest {
     @Test
     public void now() {
         print("@now()");
-        print("@now(year)");
-        print("@now(second)");
+        print("@now(year)");//年的开始
+        print("@now(month)");//月的开始
+        print("@now(week)");//周的开始
+        print("@now(day)");//日的开始
+        print("@now(hour)");//时的开始
+        print("@now(minute)");//分的开始
+        print("@now(second)");//秒的开始
     }
 
     @Test
@@ -212,7 +221,6 @@ public class PlaceholderTest {
         print("@range(10)");
         print("@range(3,7)");
         print("@range(1,10,2)");
-        print("@range(1,10,3)");
     }
 
     @Test
@@ -233,7 +241,7 @@ public class PlaceholderTest {
     @Test
     public void sentence(){
         print("@sentence()");
-        print("@sentence(5)");
+        print("@sentence(3)");
         print("@sentence(3,5)");
     }
 
@@ -241,9 +249,12 @@ public class PlaceholderTest {
     public void string() {
         print("@string()");
         print("@string(5)");
-        print("@string(aeiou,5)");
-        print("@string(number,5)");
         print("@string(7,10)");
+        print("@string(lower,5)");
+        print("@string(upper,5)");
+        print("@string(number,5)");
+        print("@string(symbol,5)");
+        print("@string(aeiou,5)");
         print("@string(aeiou,1,3)");
     }
 
@@ -284,6 +295,13 @@ public class PlaceholderTest {
     @Test
     public void zip() {
         print("@zip()");
+    }
+
+    private Object print(Object o) {
+        Object mock = Mock.mock(o);
+        System.out.println(mock);
+        Assert.assertNotEquals(mock, o);
+        return mock;
     }
 }
 

@@ -10,12 +10,18 @@ public class UserT<K,T> {
 
     private T t;
 
-    private K v;
+    private K aaa;
 
     private String name;
 
     public UserT(T t, String name) {
         this.t = t;
+        this.name = name;
+    }
+
+    public UserT(T t, K aaa, String name) {
+        this.t = t;
+        this.aaa = aaa;
         this.name = name;
     }
 
@@ -35,11 +41,11 @@ public class UserT<K,T> {
         this.name = name;
     }
 
-    public K getV() {
-        return v;
+    public K getAaa() {
+        return aaa;
     }
 
-    public void setV(K v) {
-        this.v = v;
+    public void setAaa(K aaa) {
+        this.aaa = aaa;
     }
 }
