@@ -18,9 +18,9 @@ public class ObjectMockRuleTest {
     public void test() {
         Rule rule = new Rule();
         rule.putContainRule("userId", "1");
-        rule.putContainRule("name", "@cname()");
+        String name = rule.putContainRule("name", "@cname()");
         rule.putContainRule("time", "@datetime()");
-        rule.putEqualRules("mobile", "19442615230");
+        String mobile = rule.putEqualRule("mobile", "19442615230");
         rule.putContainRule("url", "@url()");
         rule.putContainRule("email", "@email()");
         Template<User> template = TemplateMock.template(new TypeReference<User>() {}, rule);

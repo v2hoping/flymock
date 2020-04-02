@@ -4,6 +4,7 @@ import com.hoping.owl.flymock.FlyMockException;
 import com.hoping.owl.flymock.TypeReference;
 import com.hoping.owl.flymock.object.Template;
 import com.hoping.owl.flymock.object.TemplateMock;
+import com.hoping.owl.flymock.rule.Rule;
 import com.hoping.owl.starter.model.FlyMock;
 import com.hoping.owl.starter.model.MatchingMode;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -27,6 +28,20 @@ import java.lang.reflect.Type;
 public class InvokeAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InvokeAspect.class);
+
+    private Rule rule;
+
+    public InvokeAspect(Rule rule) {
+        this.rule = rule;
+    }
+
+    public Rule getRule() {
+        return rule;
+    }
+
+    public void setRule(Rule rule) {
+        this.rule = rule;
+    }
 
     @Pointcut("@annotation(flyMock)")
     public void invokerMethod(FlyMock flyMock) {
@@ -75,7 +90,7 @@ public class InvokeAspect {
 
     private Object mock(Method method) {
         Type genericReturnType = method.getGenericReturnType();
-        Template<?> template = TemplateMock.template(new TypeReference<>(genericReturnType, null));
+        Template<?> template = TemplateMock.template(new TypeReference<>(genericReturnType, null), rule);
         return template.mockType();
     }
 
