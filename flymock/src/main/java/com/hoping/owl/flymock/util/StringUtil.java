@@ -49,4 +49,10 @@ public class StringUtil {
         return String.valueOf(chars);
     }
 
+    public static String lastSpotKey(String str) {
+        String[] split = str.split("\\.");
+        return split[split.length - 1];
+    }
+
+
 }

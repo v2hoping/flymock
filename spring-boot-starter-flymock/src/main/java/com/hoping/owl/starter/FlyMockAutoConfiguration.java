@@ -3,6 +3,8 @@ package com.hoping.owl.starter;
 import com.hoping.owl.flymock.placeholder.MessagePlaceholderFormat;
 import com.hoping.owl.flymock.placeholder.PlaceholderHandle;
 import com.hoping.owl.flymock.placeholder.manager.AbstractPlaceholderManager;
+import com.hoping.owl.flymock.rule.Rule;
+import com.hoping.owl.flymock.rule.RuleUnit;
 import com.hoping.owl.flymock.util.ClassUtil;
 import com.hoping.owl.starter.util.SpringRegisterUtil;
 import com.hoping.owl.starter.util.SpringUtil;
@@ -10,8 +12,15 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.env.AbstractEnvironment;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.MapPropertySource;
+import org.springframework.core.env.MutablePropertySources;
 
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
@@ -25,9 +34,13 @@ import java.util.Set;
  */
 @EnableConfigurationProperties(FlyMockProperties.class)
 @ConditionalOnProperty(name = "spring.fly.mock.enable", havingValue = "true", matchIfMissing = true)
-public class FlyMockAutoConfiguration implements BeanPostProcessor,CommandLineRunner {
+public class FlyMockAutoConfiguration implements BeanPostProcessor, CommandLineRunner {
 
     private Set<PlaceholderHandle> placeholderHandles = new HashSet<>();
+
+    private static final String COMMON_CONTAIN = "spring.fly.mock.contain.";
+
+    private static final String COMMON_EQUAL = "spring.fly.mock.equal.";
 
     @Bean
     public SpringUtil springUtil() {
@@ -35,8 +48,8 @@ public class FlyMockAutoConfiguration implements BeanPostProcessor,CommandLineRu
     }
 
     @Bean
-    public InvokeAspect invokeAspect() {
-        return new InvokeAspect();
+    public InvokeAspect invokeAspect(Rule rule) {
+        return new InvokeAspect(rule);
     }
 
     @Bean
@@ -47,6 +60,24 @@ public class FlyMockAutoConfiguration implements BeanPostProcessor,CommandLineRu
     @Bean
     public SpringPlaceholderManager springPlaceholderManager() {
         return new SpringPlaceholderManager();
+    }
+
+    @Bean
+    public Rule rule() {
+        Set<String> prefixArray = new HashSet<>();
+        prefixArray.add(COMMON_CONTAIN);
+        prefixArray.add(COMMON_EQUAL);
+        Map<String, Set<RuleUnit>> mapPropertyRuleUnitByPrefix = SpringUtil.getMapPropertyRuleUnitByPrefix(prefixArray);
+        Rule rule = new Rule();
+        Set<RuleUnit> containRuleUnits = mapPropertyRuleUnitByPrefix.get(COMMON_CONTAIN);
+        if(containRuleUnits != null) {
+            rule.putContainRules(containRuleUnits);
+        }
+        Set<RuleUnit> equalsRuleUnits = mapPropertyRuleUnitByPrefix.get(COMMON_EQUAL);
+        if(equalsRuleUnits != null) {
+            rule.putEqualRules(equalsRuleUnits);
+        }
+        return rule;
     }
 
     @Override

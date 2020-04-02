@@ -1,6 +1,7 @@
-package com.hoping.owl;
+package com.hoping.owl.release;
 
 import com.alibaba.fastjson.JSON;
+import com.hoping.owl.*;
 import com.hoping.owl.flymock.placeholder.PlaceholderHandle;
 import com.hoping.owl.flymock.strategy.StrategyType;
 import org.junit.Assert;
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
  *
  * @author houping wang
  */
-public class AspectMethodTest extends Base{
+public class AspectMethodTest extends Base {
 
     @Autowired
     private AspectMethod aspectMethod;
@@ -244,12 +245,11 @@ public class AspectMethodTest extends Base{
     public void sayString() {
         String str = someMethod.sayString();
         User user = someMethod.sayUser();
-        System.out.println(str);
-        System.out.println(JSON.toJSONString(user));
+        System.out.println("输出:" + str);
+        System.out.println("输出:" + JSON.toJSONString(user));
     }
 
     @Test
     public void sayUser() {
-
     }
 }

@@ -2,6 +2,7 @@ package com.hoping.owl.flymock.rule;
 
 import com.hoping.owl.flymock.util.StringUtil;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -61,8 +62,20 @@ public class Rule {
         return containRules.put(key.toLowerCase(), value);
     }
 
-    public String putEqualRules(String key, String value) {
+    public String putEqualRule(String key, String value) {
         return equalRules.put(key.toLowerCase(), value);
+    }
+
+    public void putContainRules(Set<RuleUnit> ruleUnits) {
+        for(RuleUnit ruleUnit : ruleUnits) {
+            this.putContainRule(ruleUnit.getKey(), ruleUnit.getValue());
+        }
+    }
+
+    public void putEqualRules(Set<RuleUnit> ruleUnits) {
+        for(RuleUnit ruleUnit : ruleUnits) {
+            this.putEqualRule(ruleUnit.getKey(), ruleUnit.getValue());
+        }
     }
 
     public boolean isFlag() {
