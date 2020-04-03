@@ -13,6 +13,8 @@ public class GenericSuperclassUtil {
 
     /**
      * 获取泛型类Class对象，不是泛型类则返回null
+     * @param clazz 类型
+     * @return 返回真实类型
      */
     public static Class<?> getActualTypeArgument(Class<?> clazz) {
         Class<?> entitiClass = null;

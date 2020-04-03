@@ -17,6 +17,7 @@ public @interface FiledMock {
     /**
      * 支持各种占位符
      * 例如："@string()"
+     * @return 占位符，字符串
      */
     String value() default "";
 
