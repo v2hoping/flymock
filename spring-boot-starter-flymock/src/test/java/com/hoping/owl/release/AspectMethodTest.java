@@ -250,6 +250,8 @@ public class AspectMethodTest extends Base {
     }
 
     @Test
-    public void sayUser() {
+    public void singleMethod() {
+        User user = singleMethod.sayUser();
+        System.out.println("输出:" + JSON.toJSONString(user));
     }
 }

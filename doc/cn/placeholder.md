@@ -1,12 +1,9 @@
-可以支持min-max、count、min-max.dmin-dmax、min-max.dcount、count.dmin-dmax、count.dcount、+step。
-不同类型类型适用的规则不同。
-
+### 可以支持min-max、count、min-max.dmin-dmax、min-max.dcount、count.dmin-dmax、count.dcount、+step。不同类型类型适用的规则不同。
+```
 例子:
-
 String mockJson = Mock.mockToJson("{\"name|1-3\":\"@cname()\"}");
-
 System.out.println(mockJson); //生成{"name":"许霞许霞许霞"}
-
+```
 
 ## 适用类型
 
