@@ -170,7 +170,7 @@ public class TemplateMock {
             if (paramType instanceof GenericArrayType) {
                 value = arrayTemplateHandelT(paramType, t);
             } else {
-                value = jsonTemplate(new TypeReference<>(paramType, t));
+                value = jsonTemplate(new TypeReference<>(paramType, t), rule);
             }
             instance.put(key, value);
         }
