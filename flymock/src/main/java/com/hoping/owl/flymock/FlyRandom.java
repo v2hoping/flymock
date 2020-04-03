@@ -124,6 +124,7 @@ public class FlyRandom {
 
     /**
      * natural
+     * @return natural, type is Integer
      */
     public static Integer natural() {
         return natural(0);
@@ -146,6 +147,7 @@ public class FlyRandom {
 
     /**
      * integer
+     * @return integer
      */
     public static Integer integer() {
         return integer(-HALF_INTEGER_VALUE, HALF_INTEGER_VALUE);
@@ -164,6 +166,10 @@ public class FlyRandom {
     /**********
      * double *
      **********/
+    /**
+     * double
+     * @return double
+     */
     public static Double doubleRandom() {
         return doubleRandom(-65536);
     }
@@ -203,6 +209,10 @@ public class FlyRandom {
     /*************
      * character *
      *************/
+    /**
+     * character
+     * @return character
+     */
     public static Character character() {
         return character(CHARACTER_FORMAT.get(natural(0, CHARACTER_FORMAT.size() - 1)));
     }
@@ -211,7 +221,7 @@ public class FlyRandom {
      * 生成字符
      *
      * @param format lower|upper|number|symbol
-     *               pool: "abcd"->'a'|'b'|'c'|'d'
+     *               pool: "abcd"相等于'a'|'b'|'c'|'d'
      * @return Character
      */
     public static Character character(String format) {
@@ -239,6 +249,7 @@ public class FlyRandom {
 
     /**
      * string
+     * @return string
      */
     public static String string() {
         return string(3, 7);
@@ -260,7 +271,7 @@ public class FlyRandom {
      * 生成字符串
      *
      * @param format lower|upper|number|symbol
-     *               pool: "abcd"->'a'|'b'|'c'|'d'
+     *               pool: "abcd"相当于'a'|'b'|'c'|'d'
      * @param min    if is null set 3, min value is 0
      * @param max    if is null set 10, max value is Integer.Max
      * @return String
@@ -278,6 +289,8 @@ public class FlyRandom {
 
     /**
      * range
+     * @param stop stop
+     * @return 1,2,3...stop
      */
     public static List<Integer> range(Integer stop) {
         return range(0, stop);
@@ -304,6 +317,7 @@ public class FlyRandom {
     /**
      * date
      * example:2004-04-08
+     * @return date,the type is String
      */
     public static String date() {
         return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -316,6 +330,7 @@ public class FlyRandom {
     /**
      * time
      * example:21:18:44
+     * @return time
      */
     public static String time() {
         return new SimpleDateFormat("HH:mm:ss").format(new Date());
@@ -324,6 +339,7 @@ public class FlyRandom {
     /**
      * datetime
      * example:2004-04-08 21:18:44
+     * @return datetime
      */
     public static String datetime() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -336,6 +352,7 @@ public class FlyRandom {
     /**
      * now
      * Beginning of Time in Different Dimensions
+     * @return now
      */
     public static Date now() {
         return new Date();
@@ -417,6 +434,7 @@ public class FlyRandom {
 
     /**
      * image
+     * @return image
      */
     public static String color() {
         return "#" + hex();
@@ -432,6 +450,7 @@ public class FlyRandom {
 
     /**
      * paragraph
+     * @return paragraph
      */
     public static String paragraph() {
         return paragraph(null);
@@ -452,6 +471,7 @@ public class FlyRandom {
 
     /**
      * sentence
+     * @return sentence
      */
     public static String sentence() {
         return sentence(null);
@@ -516,6 +536,7 @@ public class FlyRandom {
 
     /**
      * title
+     * @return title
      */
     public static String title() {
         return title(null);
@@ -539,6 +560,7 @@ public class FlyRandom {
 
     /**
      * cparagraph
+     * @return cparagraph
      */
     public static String cparagraph() {
         return cparagraph(null);
@@ -559,6 +581,7 @@ public class FlyRandom {
 
     /**
      * csentence
+     * @return csentence
      */
     public static String csentence() {
         return csentence(null);
@@ -583,6 +606,10 @@ public class FlyRandom {
     /*********
      * cword *
      *********/
+    /**
+     * cword
+     * @return cword
+     */
     public static String cword() {
         return cword(1);
     }
@@ -609,7 +636,7 @@ public class FlyRandom {
      * @param pool 汉字池 null|common
      *             null:所有汉字
      *             common:常用汉字
-     *             "我是谁"|1->"我"
+     *             "我是谁"|1相当于"我"
      * @param min  最小数
      * @param max  最大数
      * @return String
@@ -632,6 +659,7 @@ public class FlyRandom {
 
     /**
      * ctitle
+     * @return ctitle
      */
     public static String ctitle() {
         return ctitle(null);
@@ -655,6 +683,7 @@ public class FlyRandom {
 
     /**
      * name
+     * @return first
      */
     public static String first() {
         return ArrayUtil.pick(FIRST_NAMES);
@@ -670,6 +699,7 @@ public class FlyRandom {
 
     /**
      * cname
+     * @return cname
      */
     public static String cfirst() {
         return ArrayUtil.pick(FIRST_CNAMES);
@@ -685,6 +715,7 @@ public class FlyRandom {
 
     /**
      * web
+     * @return web
      */
     public static String url() {
         return protocol() + "://" + domain() + "/" + word();
@@ -718,6 +749,7 @@ public class FlyRandom {
 
     /**
      * Address
+     * @return Address
      */
     public static String region() {
         return ArrayUtil.pick(REGION);
@@ -786,6 +818,7 @@ public class FlyRandom {
 
     /**
      * number
+     * @return number
      */
     public static String guid() {
         return guid("native");

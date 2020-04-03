@@ -94,6 +94,7 @@ public class TypeReference<T> {
 
     /**
      * 检查嵌套循环,嵌套次数大于1则返回false
+     * @return 返回是否多次嵌套
      */
     public boolean checkNestTwo() {
         return this.checkNest(this) < 2;
